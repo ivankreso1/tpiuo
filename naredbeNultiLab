@@ -1,0 +1,17 @@
+Pokrece ona 3 containera
+	docker-compose up -d
+
+Stvara topic s 3 particije
+	docker exec tpiuo_labos_0_kafka1_1 kafka-topics --bootstrap-server tpiuo_labos_0_kafka1_1:9092 --create --partitions 3 --topic input-topic
+
+Popis topica
+	docker exec tpiuo_labos_0_kafka1_1 kafka-topics --bootstrap-server tpiuo_labos_0_kafka1_1:9092 --list
+
+Pisanje u topic s kljucem i vrijednosti
+	docker exec --interactive --tty tpiuo_labos_0_kafka1_1 kafka-console-producer --bootstrap-server tpiuo_labos_0_kafka1_1:9092 --property parse.key=true --property key.separator=:_:  --topic input-topic
+> nekikljuc:_:Blaaaa
+- i tak kolko zelis s kakvim kljucecima zelis
+
+Slusanje
+	docker exec --interactive --tty tpiuo_labos_0_kafka1_1 kafka-console-consumer --bootstrap-server tpiuo_labos_0_kafka1_1:9092 --topic input-topic --from-beginning
+
